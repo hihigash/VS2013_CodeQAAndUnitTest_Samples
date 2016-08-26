@@ -1,0 +1,56 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+namespace _3_CodeMetricsDemo
+{
+    class CodingHorror
+    {
+		public void Horror1(string s)
+		{
+			switch(s)
+			{
+				<# for (char s = 'A'; s <= 'Z'; s++) { #>
+				case "<#= s #>":
+					break;
+				<# } #>
+			}
+		}
+
+		public void Horror2(string s)
+		{
+			<# for (int i = 1; i < 6; i++){ #>
+			if (s.Length == <#= i #>){
+				switch(s[0])
+				{
+					<# for (char c = 'A'; c <= 'Z'; c++) { #>
+					case '<#= c #>':
+						break;
+					<# } #>
+				}
+			}
+			<# } #>
+		}
+
+		public void Horror3(string s)
+		{
+			switch(s[0])
+			{
+				<# for (char c = 'A'; c <= 'Z'; c++) { #>
+				case '<#= c #>':
+					switch(s[1])
+					{
+						<# for (char c2 = 'A'; c2 <= 'Z'; c2++) { #>
+						case '<#= c2 #>':
+							break;
+						<# } #>						
+					}
+					break;
+				<# } #>
+			}
+		}
+    }
+}
